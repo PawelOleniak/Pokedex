@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { OptionsBar } from 'components';
+import { Library } from 'pages';
 
 function App() {
+  const [searched, setSearched] = useState();
+  const [selectedType, setSelectedType] = useState(null);
+  const [listState, setListState] = useState('normal');
+  const [loadedDataLength, setLoadedDataLength] = useState(0);
+  if (loadedDataLength > 1180) alert('Hold on! The pokemons are running out!');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '400px' }}>
+      <OptionsBar
+        searched={searched}
+        setSearched={setSearched}
+        setSelectedType={setSelectedType}
+        setListState={setListState}
+      ></OptionsBar>
+      <Library
+        searched={searched}
+        selectedType={selectedType}
+        listState={listState}
+        setLoadedDataLength={setLoadedDataLength}
+        loadedDataLength={loadedDataLength}
+      />
     </div>
   );
 }
